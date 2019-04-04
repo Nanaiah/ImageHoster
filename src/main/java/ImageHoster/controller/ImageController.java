@@ -49,6 +49,7 @@ public class ImageController {
         Image image = imageService.getImage(id);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("comments", image.getComments());
         return "images/image";
     }
 
@@ -58,6 +59,7 @@ public class ImageController {
     public String newImage() {
         return "images/upload";
     }
+
 
     //This controller method is called when the request pattern is of type 'images/upload' and also the incoming request is of POST type
     //The method receives all the details of the image to be stored in the database, and now the image will be sent to the business logic to be persisted in the database
@@ -99,12 +101,14 @@ public class ImageController {
             model.addAttribute("editError", error);
             model.addAttribute("image", image);
             model.addAttribute("tags", image.getTags());
+            model.addAttribute("comments", image.getComments());
             return "images/image";
 
         } else {
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("image", image);
             model.addAttribute("tags", tags);
+            model.addAttribute("comments", image.getComments());
             return "images/edit";
         }
 
@@ -158,6 +162,7 @@ public class ImageController {
             model.addAttribute("deleteError", error);
             model.addAttribute("image", image);
             model.addAttribute("tags", image.getTags());
+            model.addAttribute("comments", image.getComments());
             return "images/image";
 
         } else {
